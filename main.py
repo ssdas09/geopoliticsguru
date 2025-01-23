@@ -6,7 +6,7 @@ from phi.storage.agent.sqlite import SqlAgentStorage
 
 import streamlit as st
 import os
-os.environ['GOOGLE_API_KEY']==st.secrets["GOOGLE_API_KEY"]
+os.environ['GOOGLE_API_KEY']=st.secrets
 
 storage = SqlAgentStorage(
     table_name="agent_sessions",
