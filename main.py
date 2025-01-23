@@ -6,7 +6,12 @@ from phi.storage.agent.sqlite import SqlAgentStorage
 
 import streamlit as st
 import os
-os.environ['GOOGLE_API_KEY']=st.secrets
+if "GOOGLE_API_KEY" not in st.session_state:
+    st.session_state.GOOGLE_API_KEY = st.text_input("Enter your Google API key:", type="password")
+    if st.session_state.GOOGLE_API_KEY:
+        os.environ['GOOGLE_API_KEY'] = st.session_state.GOOGLE_API_KEY
+        st.success("API key set successfully! You can now start chatting.")
+    st.stop()
 
 storage = SqlAgentStorage(
     table_name="agent_sessions",
